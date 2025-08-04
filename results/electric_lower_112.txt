@@ -1,0 +1,27 @@
+Dataset: electric
+Method: lower
+Budget: 112
+
+Multiclass Metrics:
+Accuracy      : 0.7083
+Precision (M) : 0.7066
+Recall    (M) : 0.6825
+F1-score  (M) : 0.6855
+Precision (m) : 0.7083
+Recall    (m) : 0.7083
+F1-score  (m) : 0.7083
+
+Binary Metrics (0 vs rest):
+Precision: 0.7020
+Recall   : 0.5249
+F1-score : 0.6007
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.71      0.84      0.77      6594
+           1       0.70      0.52      0.60      4734
+
+    accuracy                           0.71     11328
+   macro avg       0.71      0.68      0.69     11328
+weighted avg       0.71      0.71      0.70     11328

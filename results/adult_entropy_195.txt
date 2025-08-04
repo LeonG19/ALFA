@@ -1,0 +1,27 @@
+Dataset: adult
+Method: entropy
+Budget: 195
+
+Multiclass Metrics:
+Accuracy      : 0.8313
+Precision (M) : 0.7688
+Recall    (M) : 0.7529
+F1-score  (M) : 0.7601
+Precision (m) : 0.8313
+Recall    (m) : 0.8313
+F1-score  (m) : 0.8313
+
+Binary Metrics (0 vs rest):
+Precision: 0.6579
+Recall   : 0.6034
+F1-score : 0.6295
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.88      0.90      0.89      3725
+           1       0.66      0.60      0.63      1160
+
+    accuracy                           0.83      4885
+   macro avg       0.77      0.75      0.76      4885
+weighted avg       0.83      0.83      0.83      4885

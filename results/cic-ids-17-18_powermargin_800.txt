@@ -1,0 +1,33 @@
+Dataset: cic-ids-17-18
+Method: powermargin
+Budget: 800
+
+Multiclass Metrics:
+Accuracy      : 0.9652
+Precision (M) : 0.5206
+Recall    (M) : 0.6758
+F1-score  (M) : 0.5650
+Precision (m) : 0.9652
+Recall    (m) : 0.9652
+F1-score  (m) : 0.9652
+
+Binary Metrics (0 vs rest):
+Precision: 0.7639
+Recall   : 0.4689
+F1-score : 0.5811
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.97      0.99      0.98     18972
+           1       0.36      1.00      0.53        31
+           2       0.86      0.96      0.90       417
+           3       0.00      0.00      0.00        14
+           4       0.00      0.00      0.00       498
+           5       0.60      1.00      0.75         3
+           6       0.37      0.70      0.48        23
+           7       1.00      0.76      0.86        42
+
+    accuracy                           0.97     20000
+   macro avg       0.52      0.68      0.56     20000
+weighted avg       0.94      0.97      0.95     20000

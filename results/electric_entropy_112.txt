@@ -1,0 +1,27 @@
+Dataset: electric
+Method: entropy
+Budget: 112
+
+Multiclass Metrics:
+Accuracy      : 0.7149
+Precision (M) : 0.7163
+Recall    (M) : 0.6874
+F1-score  (M) : 0.6906
+Precision (m) : 0.7149
+Recall    (m) : 0.7149
+F1-score  (m) : 0.7149
+
+Binary Metrics (0 vs rest):
+Precision: 0.7198
+Recall   : 0.5203
+F1-score : 0.6040
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.71      0.85      0.78      6594
+           1       0.72      0.52      0.60      4734
+
+    accuracy                           0.71     11328
+   macro avg       0.72      0.69      0.69     11328
+weighted avg       0.72      0.71      0.70     11328

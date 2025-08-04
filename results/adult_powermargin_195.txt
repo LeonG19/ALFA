@@ -1,0 +1,27 @@
+Dataset: adult
+Method: powermargin
+Budget: 195
+
+Multiclass Metrics:
+Accuracy      : 0.8272
+Precision (M) : 0.7621
+Recall    (M) : 0.7529
+F1-score  (M) : 0.7572
+Precision (m) : 0.8272
+Recall    (m) : 0.8272
+F1-score  (m) : 0.8272
+
+Binary Metrics (0 vs rest):
+Precision: 0.6434
+Recall   : 0.6112
+F1-score : 0.6269
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.88      0.89      0.89      3725
+           1       0.64      0.61      0.63      1160
+
+    accuracy                           0.83      4885
+   macro avg       0.76      0.75      0.76      4885
+weighted avg       0.82      0.83      0.83      4885

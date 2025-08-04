@@ -1,0 +1,27 @@
+Dataset: credit
+Method: lc
+Budget: 1000
+
+Multiclass Metrics:
+Accuracy      : 0.9995
+Precision (M) : 0.9535
+Recall    (M) : 0.8712
+F1-score  (M) : 0.9082
+Precision (m) : 0.9995
+Recall    (m) : 0.9995
+F1-score  (m) : 0.9995
+
+Binary Metrics (0 vs rest):
+Precision: 0.9074
+Recall   : 0.7424
+F1-score : 0.8167
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     42656
+           1       0.91      0.74      0.82        66
+
+    accuracy                           1.00     42722
+   macro avg       0.95      0.87      0.91     42722
+weighted avg       1.00      1.00      1.00     42722

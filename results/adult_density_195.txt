@@ -1,0 +1,27 @@
+Dataset: adult
+Method: density
+Budget: 195
+
+Multiclass Metrics:
+Accuracy      : 0.8336
+Precision (M) : 0.7718
+Recall    (M) : 0.7576
+F1-score  (M) : 0.7642
+Precision (m) : 0.8336
+Recall    (m) : 0.8336
+F1-score  (m) : 0.8336
+
+Binary Metrics (0 vs rest):
+Precision: 0.6614
+Recall   : 0.6129
+F1-score : 0.6362
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.88      0.90      0.89      3725
+           1       0.66      0.61      0.64      1160
+
+    accuracy                           0.83      4885
+   macro avg       0.77      0.76      0.76      4885
+weighted avg       0.83      0.83      0.83      4885

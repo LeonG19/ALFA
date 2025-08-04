@@ -1,0 +1,27 @@
+Dataset: adult
+Method: random
+Budget: 195
+
+Multiclass Metrics:
+Accuracy      : 0.8295
+Precision (M) : 0.7668
+Recall    (M) : 0.7460
+F1-score  (M) : 0.7553
+Precision (m) : 0.8295
+Recall    (m) : 0.8295
+F1-score  (m) : 0.8295
+
+Binary Metrics (0 vs rest):
+Precision: 0.6580
+Recall   : 0.5871
+F1-score : 0.6205
+
+Classification Report (multiclass):
+              precision    recall  f1-score   support
+
+           0       0.88      0.90      0.89      3725
+           1       0.66      0.59      0.62      1160
+
+    accuracy                           0.83      4885
+   macro avg       0.77      0.75      0.76      4885
+weighted avg       0.82      0.83      0.83      4885
