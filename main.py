@@ -29,12 +29,12 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neighbors import NearestNeighbors
 
-from active_learning_framework.al import METHOD_DICT
-from active_learning_framework.config import get_config
+from al import METHOD_DICT
+from config import get_config
 from TVAE.tvae import TVAE
 from ctgan import CTGAN
 from realtabformer import REaLTabFormer
-from active_learning_framework.mlp import TorchMLPClassifier
+from mlp import TorchMLPClassifier
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Unified AL runner")
