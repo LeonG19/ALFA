@@ -167,6 +167,8 @@ def get_model_config(model_name):
   elif model_name == 'scc':
     cfg.SCC = CN()
     cfg.SCC.USE_GPU = True
+  else:
+    
 
   return cfg
 
@@ -201,7 +203,6 @@ def get_config(dataset, model):
 
   cfg.EXPERIMENT.MODEL_NAME = model
   cfg.DATASET = get_dataset_config(dataset)
-  cfg.MODEL = get_model_config(model)
   return cfg
 
 
