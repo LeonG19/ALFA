@@ -29,7 +29,7 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neighbors import NearestNeighbors
 
-from al_functions import METHOD_DICT
+from active_learning_functions import METHOD_DICT
 from config import get_config
 from ctgan import TVAE
 from ctgan import CTGAN
