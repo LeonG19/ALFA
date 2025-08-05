@@ -55,7 +55,8 @@ When annotation budgets are tight, active learning often misses rare classes, le
    - `NUM_FEATURE`, `STANDARDIZE`, `NUM_CLASS`, etc.
 4. Example config snippet:
 
-   ![config snippet](./source_code/config-example.png)
+   <img width="609" height="143" alt="image" src="https://github.com/user-attachments/assets/26b905d8-2465-4127-ba6c-59a6056dd73c" />
+
 
 ---
 
