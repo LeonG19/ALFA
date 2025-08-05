@@ -107,7 +107,6 @@ class TorchMLPClassifier:
                 loss = criterion(logits, yb)
                 loss.backward()
                 optimizer.step()
-            print(f"Epoch {epoch+1}/{self.max_iter} complete")
         return self
 
     def predict(self, X: np.ndarray | torch.Tensor) -> np.ndarray:

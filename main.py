@@ -29,9 +29,9 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.neighbors import NearestNeighbors
 
-from al import METHOD_DICT
+from al_functions import METHOD_DICT
 from config import get_config
-from TVAE.tvae import TVAE
+from ctgan import TVAE
 from ctgan import CTGAN
 from realtabformer import REaLTabFormer
 from mlp import TorchMLPClassifier
@@ -47,14 +47,14 @@ def parse_args():
     parser.add_argument('--random_state', type=int, default=42)
     parser.add_argument('--num_synthetic', type=float, default=3)
     parser.add_argument('--filter_synthetic', action='store_true')
-    parser.add_argument('--anchor_alpha', type=float, default=1.0)
-    parser.add_argument('--anchor_steepness', type=float, default=100.0)
+    parser.add_argument('--alpha', type=float, default=1.0)
+    parser.add_argument('--steepness', type=float, default=100.0)
     return parser.parse_args()
 
 def ensure_results_dir(args):
     gen = args.generator if args.generator else ''
     alpha = args.alpha if args.alpha else ''
-    path = os.path.join('results', args.dataset, args.al_method, gen, f"{args.function}_{alpha}")
+    path = os.path.join('results', args.dataset, args.al_method, gen, f"{args.al_function}_{alpha}")
     os.makedirs(path, exist_ok=True)
     return path
 
@@ -75,13 +75,13 @@ def print_dist(title, y):
     print()
 
 def compute_anchor_fraction(f_c, min_frac=0.01, alpha=1, steepness=100):
-    return alpha * math.exp(-steepness * (f_c - min_frac))
+    return min( 1, (alpha * math.exp(-steepness * (f_c - min_frac))))
 
 def init_classifier(name, args, cfg):
     if name=='MLP':
         return TorchMLPClassifier(cfg,
-                                  hidden_layer_sizes=tuple(100),
-                                  max_iter=300,
+                                  hidden_layer_sizes=tuple([100]),
+                                  max_iter=100,
                                   batch_size=64,
                                   lr=1e-3,
                                   random_state=args.random_state,
@@ -143,7 +143,7 @@ def base_set_up(args):
     if cfg.DATASET.STANDARDIZE:
         s=StandardScaler().fit(Xtr)
         Xtr,Xv,Xt=s.transform(Xtr),s.transform(Xv),s.transform(Xt)
-    clf=init_classifier(args.al_method, args, cfg)
+    clf=init_classifier(args.classifier, args, cfg)
     clf.fit(Xtr,ytr)
     return cfg, clf, Xtr, ytr, Xv, yv, Xt, yt
 
@@ -151,12 +151,12 @@ def active_function(args, Xtr, Xv, ytr, yv, clf):
     sel=METHOD_DICT[args.al_function]().sample(Xv,args.budget,clf,Xtr)
     if sel is not None and len(sel):
         Xtr=np.vstack([Xtr,Xv[sel]]); ytr=np.hstack([ytr,yv[sel]])
-    return Xtr, ytr
+    return Xtr, ytr, sel
 
 
 def run_base(args, results_dir):
     cfg, clf, Xtr, ytr, Xv, yv, Xt, yt = base_set_up(args)
-    Xtr, ytr = active_function(args, Xtr, Xv, ytr, yv, clf)
+    Xtr, ytr,_ = active_function(args, Xtr, Xv, ytr, yv, clf)
     clf.fit(Xtr, ytr)
     y_pred=clf.predict(Xt)
     return y_pred, yt
@@ -165,7 +165,7 @@ def run_base(args, results_dir):
 
 def run_augmented(args, results_dir):
     cfg, clf, Xtr, ytr, Xv, yv, Xt, yt = base_set_up(args)
-    Xal, yal = active_function(args, Xtr, Xv, ytr, yv, clf)
+    Xal, yal,_ = active_function(args, Xtr, Xv, ytr, yv, clf)
     u,c=np.unique(yal,return_counts=True)
     maj=u[np.argmax(c)]
     fn=cfg.DATASET.FEATURE_NAMES
@@ -192,11 +192,11 @@ def run_augmented(args, results_dir):
 
 def run_alfa(args, results_dir):
     cfg, clf, Xtr, ytr, Xv, yv, Xt, yt = base_set_up(args)
-    Xal, yal = active_function(args, Xtr, Xv, ytr, yv, clf)
+    Xal, yal, sel = active_function(args, Xtr, Xv, ytr, yv, clf)
     u,c=np.unique(yal,return_counts=True)
     freqs=c/len(yal)
     mc=u[np.argmin(freqs)]; idx=np.where(yal==mc)[0]
-    frac=compute_anchor_fraction(freqs[u.tolist().index(mc)],args.anchor_alpha,args.anchor_steepness)
+    frac=compute_anchor_fraction(freqs[u.tolist().index(mc)],args.alpha, args.steepness)
     n=max(1,int(frac*len(idx)))
     choice=np.random.RandomState(args.random_state).choice(idx,size=n,replace=False)
     Xu,yu=Xal[choice],yal[choice]
@@ -204,11 +204,11 @@ def run_alfa(args, results_dir):
     mask=np.ones(len(yv),bool)
     if sel is not None: mask[sel]=False
     per=knn_expand(Xu,yu,Xv[mask],yv[mask],cfg.DATASET.FEATURE_NAMES)
-    gen=init_generator(args.generator,cfg)
     syn=[]
     discrete = cfg.DATASET.DISCRETE_FEATURES
     discrete = discrete[:-1]
     for cls,dfc in per.items():
+        gen=init_generator(args.generator,cfg)
         gen.fit(dfc,)
         k=int(c[u.tolist().index(cls)]*args.num_synthetic)
         try: dfs=gen.sample(samples=k)
@@ -230,7 +230,7 @@ def main():
     res=ensure_results_dir(args)
     if args.al_method=='base':
         y_pred, y_true = run_base(args,res)
-    elif args.al_method=='augmented_al':
+    elif args.al_method=='DA':
         y_pred, y_true =  run_augmented(args,res)
     else:
         y_pred, y_true =  run_alfa(args,res)

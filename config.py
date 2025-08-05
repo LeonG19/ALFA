@@ -15,35 +15,7 @@ def get_dataset_config(dataset_name):
   cfg.IS_PYTORCH = False  # whether it will be used to train a PyTorch model or not (i.e., skelarn/XGBoost)
   cfg.VAL_BATCH_SIZE = 64  # for neural nets
 
-  if dataset_name == 'drebin':
-    cfg.SOURCE = 'android'
-    cfg.FEATURE = 'drebin'
-    cfg.NUM_FEATURE = 16978
-    cfg.STANDARDIZE = False
-    cfg.NUM_CLASS = 2
-  elif dataset_name == 'apigraph':
-    cfg.SOURCE = 'android'
-    cfg.FEATURE = 'apigraph'
-    cfg.NUM_FEATURE = 1159
-    cfg.STANDARDIZE = False
-    cfg.NUM_CLASS = 2
-  elif dataset_name in ['ember', 'bodmas']:
-    cfg.SOURCE = 'windows'
-    cfg.FEATURE = 'ember'
-    cfg.FEATURE_NAMES = [str(i) for i in range(2381)]
-    cfg.DISCRETE_FEATURES = ["Label"]
-    cfg.NUM_FEATURE = 2381
-    cfg.STANDARDIZE = True
-    cfg.NUM_CLASS = 351
-  elif dataset_name == 'bodmas2':
-    cfg.SOURCE = 'windows'
-    cfg.FEATURE = 'ember'
-    cfg.FEATURE_NAMES = [str(i) for i in range(150)]
-    cfg.DISCRETE_FEATURES = ["Label"]
-    cfg.NUM_FEATURE = 150
-    cfg.STANDARDIZE = True
-    cfg.NUM_CLASS = 28
-  elif dataset_name in ['cic-ids-17-18', 'cic-ids-18-17']:
+  if dataset_name in ['cic-ids-17-18', 'cic-ids-18-17']:
     cfg.SOURCE = 'nids'
     cfg.FEATURE = 'nids'
     cfg.NUM_FEATURE = 82
@@ -89,66 +61,20 @@ def get_dataset_config(dataset_name):
   elif dataset_name == "electric":                                                                   
     cfg.SOURCE = 'nids'
     cfg.FEATURE = 'nids'
-    df= pd.read_csv("data/electric_unlabeled.csv")
+    df= pd.read_csv("unprocess_csv_files/electric.csv")
     feature_names = (
        df
        .drop(columns = "class")                     # original frame
        .columns
        .tolist()
     )
+    cfg.LABEL_NAME = "class"
     cfg.FEATURE_NAMES = feature_names
     cfg.DISCRETE_FEATURES = ["Label"]
     cfg.NUM_FEATURE = 5
     cfg.STANDARDIZE = True                                                                                
     cfg.NUM_CLASS = 2
-  elif dataset_name == "adult":
-    cfg.SOURCE = 'nids'
-    cfg.FEATURE = 'nids'
-    cfg.NUM_FEATURE = 14
-    df= pd.read_csv("data/adult_unlabeled.csv")
-    feature_names = (
-       df
-       .drop(columns = "income")                     # original frame
-       .columns
-       .tolist()
-    )
-    cfg.FEATURE_NAMES = feature_names
-    cfg.DISCRETE_FEATURES  = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "native-country",
-    "Label"
-    ]
 
-    cfg.STANDARDIZE = True
-    cfg.NUM_CLASS = 2
-  elif dataset_name == "credit":
-    cfg.SOURCE = 'nids'
-    cfg.FEATURE = 'nids'
-    df= pd.read_csv("data/credit_unlabeled.csv")
-    feature_names = (
-       df
-       .drop(columns = "Class")                     # original frame
-       .columns
-       .tolist()
-    )
-    cfg.FEATURE_NAMES = feature_names
-    cfg.DISCRETE_FEATURES = ["Label"]
-    cfg.NUM_FEATURE = 29
-    cfg.STANDARDIZE = True
-    cfg.NUM_CLASS = 2
-  elif dataset_name == "unsw":
-    cfg.SOURCE = 'nids'
-    cfg.FEATURE = 'nids'
-    cfg.FEATURE_NAMES = list(range(2381))
-    cfg.DISCRETE_FEATURES = []
-    cfg.NUM_FEATURE = 38
-    cfg.STANDARDIZE = True
-    cfg.NUM_CLASS = 10
   else:
     raise ValueError('unknown dataset {}'.format(dataset_name))
 
@@ -167,9 +93,7 @@ def get_model_config(model_name):
   elif model_name == 'scc':
     cfg.SCC = CN()
     cfg.SCC.USE_GPU = True
-  else:
     
-
   return cfg
 
 
