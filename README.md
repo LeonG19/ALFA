@@ -153,31 +153,7 @@ Place outputs under `results/`. ALFA consistently outperforms standard methods, 
 
 ---
 
-## 🤝 Contributing
 
-Contributions are welcome!
-
-1. Fork the repo  
-2. Create a branch: `git checkout -b feature/...`  
-3. Commit: `git commit -m "Add feature"`  
-4. Push & open a PR  
-
-Please follow coding conventions, include tests for new functions/generators, and use provided issue/PR templates.
-
----
-
-## 📄 License & Credits
-
-- **License**: MIT  
-- **Acknowledgements**: Inspired by active learning and generative modeling literature.
-
----
-
-## 📬 Contact & Support
-
-- Maintainer: *Your Name / GitHub handle / email*  
-- Issues: via GitHub issue tracker  
-- Roadmap & docs: Coming soon
 
 ---
 
