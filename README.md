@@ -5,7 +5,7 @@ A research framework that improves active learning under low-label regimes by ad
 
 ---
 
-## 🚀 About the Project
+## About the Project
 
 **ALFA** enhances standard active learning pipelines by:
 
@@ -18,13 +18,13 @@ This leads to better generalization in imbalanced or shifting distributions—es
 
 ---
 
-## 🎯 Motivation
+## Motivation
 
 When annotation budgets are tight, active learning often misses rare classes, leading to poor generalization. ALFA addresses this gap by selectively expanding under‑represented regions in the latent space using generative sampling.
 
 ---
 
-## 🧠 Built With
+## Built With
 
 - **Python 3.x**  
 - Generative modeling: TVAE, CTGAN, RTF  
@@ -60,7 +60,7 @@ When annotation budgets are tight, active learning often misses rare classes, le
 
 ---
 
-## 📦 Usage
+## Usage
 
 ### 1. Data Preprocessing
 
@@ -72,7 +72,7 @@ python -m data_pre_process_pipeline \
   --label_col income \
   --discrete_to_label
 ```
-- `--discrete_to_label`: label‑encodes discrete/categorical features.
+- `--discrete_to_label`: label‑encodes discrete/categorical features. Use ONLY if your discrete features are not numerical
 - `output_dir` must match the reference name set in `config.py`.
 
 Produces: `data/adult/train.npz`, `val.npz`, `test.npz`, and `label2id.json`.
@@ -131,7 +131,7 @@ python -m main --al_method DA+ALFA --al_function random --generator CTGAN --clas
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 source_code/
@@ -147,7 +147,7 @@ source_code/
 
 ---
 
-## 📈 Results & Benchmarks
+##  Results & Benchmarks
 
 Place outputs under `results/`. ALFA consistently outperforms standard methods, especially in class‑imbalanced and distribution‑shifted scenarios.
 
