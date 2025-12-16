@@ -10,8 +10,10 @@ FILTER="synthetic"
 # AL methods
 AL_METHODS=("DA+ALFA")
 
+RS=("123" "456")
+
 # AL functions
-AL_FUNCTIONS=("random" "entropy" "margin" "powermargin" "coreset" "galaxy" "clue" "density")
+AL_FUNCTIONS=("random" "entropy"  "powermargin")
 
 # Create logs directory
 mkdir -p logs
@@ -19,25 +21,27 @@ mkdir -p logs
 # Loop over all combinations
 for method in "${AL_METHODS[@]}"; do
   for func in "${AL_FUNCTIONS[@]}"; do
-    echo "Running experiment with al_method=$method and al_function=$func"
+    for rand in "${RS[@]}"; do
+        echo "Running experiment with al_method=$method and al_function=$func"
 
-    LOGFILE="logs/${method}_${func}.log"
+        LOGFILE="logs/${method}_${func}.log"
 
-    # Run experiment and capture success/failure
-    if python main.py \
-        --al_method "$method" \
-        --al_function "$func" \
-        --classifier "$CLASSIFIER" \
-        --budget "$BUDGET" \
-        --dataset "$DATASET" \
-        --minority \
-        --generator "$GENERATOR" 
-    then 
-      echo "✅ Success: al_method=$method, al_function=$func"
-    else
-      echo "❌ Failed: al_method=$method, al_function=$func (check $LOGFILE)"
-      continue
-    fi
-
+        # Run experiment and capture success/failure
+        if python main.py \
+            --al_method "$method" \
+            --al_function "$func" \
+            --classifier "$CLASSIFIER" \
+            --budget "$BUDGET" \
+            --dataset "$DATASET" \
+            --generator "$GENERATOR" \
+            --random_state "$rand" \
+            --minority 
+        then 
+          echo "✅ Success: al_method=$method, al_function=$func"
+        else
+          echo "❌ Failed: al_method=$method, al_function=$func (check $LOGFILE)"
+          continue
+        fi
+    done
   done
 done

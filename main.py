@@ -60,7 +60,7 @@ def ensure_results_dir(args):
     clf = args.classifier if args.classifier else ''
     pool = args.pooling_method if args.pooling_method else ''
     minority = "minority" if args.minority else ''
-    path = os.path.join('results', args.dataset, pool, args.al_method,clf, gen, minority, f"{args.al_function}_{alpha}")
+    path = os.path.join('results', args.dataset, pool, args.al_method,clf, gen, minority, str(args.random_state), f"{args.al_function}_{alpha}")
     os.makedirs(path, exist_ok=True)
     return path
 
@@ -222,6 +222,7 @@ def run_augmented(args, results_dir):
 
 def run_alfa(args, results_dir):
     print(args.pooling_method)
+    print(args.random_state)
     cfg, clf, Xtr, ytr, Xv, yv, Xt, yt = base_set_up(args)
     print("here")
     if args.pooling_method:
