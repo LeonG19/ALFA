@@ -1,3 +1,30 @@
+# Python & System
 __pycache__/
+*.py[cod]
+*$py.class
 logs/
-git/
+.DS_Store
+
+# --- DATA FOLDERS ---
+# Ignore all data folders entirely
+data/
+# If you want to keep the folder structure but no files, use: data/** # --- RESULTS FOLDERS ---
+# 1. Ignore everything inside results
+results/**/*
+
+# 2. Allow (un-ignore) the directory structure so Git can find files
+!results/**/
+
+# 3. Explicitly allow only your important summary files
+!results/**/metrics_summary.csv
+!results/**/config.json
+!results/**/experiment_log.txt
+
+# --- GLOBAL EXCLUSIONS ---
+# Catch-all for large binaries just in case
+*.npz
+*.pkl
+*.pt
+*.pth
+*.h5
+*.ckpt
