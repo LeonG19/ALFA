@@ -15,13 +15,11 @@ def get_dataset_config(dataset_name):
   cfg.IS_PYTORCH = False  # whether it will be used to train a PyTorch model or not (i.e., skelarn/XGBoost)
   cfg.VAL_BATCH_SIZE = 64  # for neural nets
 
-  if dataset_name in ['cic-ids-17-18-S2', 'cic-ids-17-18-S3']:
-    cfg = get_dataset_config('cic-ids-17-18')
+  if dataset_name in ['cic-ids-17-18-S2', 'cic-ids-17-18-S3']: #e.g adult
+    cfg = get_dataset_config('cic-ids-17-18').clone()
     cfg.DATA_DIR = f'data/{dataset_name}'
     cfg.NAME = dataset_name
     return cfg
-  cfg = CN()
-  cfg.NAME = dataset_name
     
   if dataset_name in ['cic-ids-17-18', 'cic-ids-18-17', "cic-ids-17-18-70"]: #e.g adult
     cfg.LABEL_NAME = "Label"
