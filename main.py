@@ -32,6 +32,7 @@ from sklearn.neighbors import NearestNeighbors
 
 from active_learning_functions import METHOD_DICT
 from config import get_config
+from config import get_dataset_config
 from ctgan import TVAE
 from ctgan import CTGAN
 from realtabformer import REaLTabFormer
@@ -54,13 +55,14 @@ def parse_args():
     parser.add_argument('--minority', action = 'store_true')
     return parser.parse_args()
 
-def ensure_results_dir(args):
+def ensure_results_dir(args, cfg):
+    root = cfg.ROOT_DIR
     gen = args.generator if args.generator else ''
     alpha = args.alpha if args.alpha else ''
     clf = args.classifier if args.classifier else ''
     pool = args.pooling_method if args.pooling_method else ''
     minority = "minority" if args.minority else ''
-    path = os.path.join('results', args.dataset, pool, args.al_method,clf, gen, minority, str(args.random_state), f"{args.al_function}_{alpha}")
+    path = os.path.join('results', root, args.dataset, pool, args.al_method,clf, gen, minority, str(args.random_state), f"{args.al_function}_{alpha}")
     os.makedirs(path, exist_ok=True)
     return path
 
@@ -286,7 +288,8 @@ def run_alfa(args, results_dir):
 
 def main():
     args=parse_args()
-    res=ensure_results_dir(args)
+    df_cfg = get_dataset_config(args.dataset)
+    res=ensure_results_dir(args, cfg)
     if args.al_method=='base' and not args.pooling_method:
         y_pred, y_true = run_base(args,res)
     elif args.al_method=='DA':

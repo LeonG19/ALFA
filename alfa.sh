@@ -3,7 +3,7 @@
 # Base parameters
 CLASSIFIER="MLP"
 BUDGET=700
-DATASET="cic-ids-17-18"
+DATASET="cic-ids-17-18-70"
 GENERATOR="CTGAN"
 FILTER="synthetic"
 

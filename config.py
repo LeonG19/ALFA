@@ -15,9 +15,53 @@ def get_dataset_config(dataset_name):
   cfg.IS_PYTORCH = False  # whether it will be used to train a PyTorch model or not (i.e., skelarn/XGBoost)
   cfg.VAL_BATCH_SIZE = 64  # for neural nets
 
-  if dataset_name in ['cic-ids-17-18', 'cic-ids-18-17', "cic-ids-17-18-70"]: #e.g adult
+  if dataset_name in ["cic-ids-17-18-70"]: #e.g adult
     cfg.LABEL_NAME = "Label"
+    cfg.ROOT_DIR = "cic_results_70"
+    df= pd.read_csv("raw_data/CIC_2017_day_aligned.csv")
+    feature_names = (
+       df
+       .drop(columns = "Label")                     
+       .columns
+       .tolist()
+    )
+    cfg.FEATURE_NAMES = feature_names
+    cfg.DISCRETE_FEATURES = [    "Dst Port",
+    "Total Fwd Packet",
+    "Total Bwd packets",
+    "Fwd PSH Flags",
+    "Bwd PSH Flags",
+    "Fwd URG Flags",
+    "Bwd URG Flags",
+    "Fwd RST Flags",
+    "Bwd RST Flags",
+    "Fwd Header Length",
+    "Bwd Header Length",
+    "FIN Flag Count",
+    "SYN Flag Count",
+    "RST Flag Count",
+    "PSH Flag Count",
+    "ACK Flag Count",
+    "URG Flag Count",
+    "CWR Flag Count",
+    "ECE Flag Count",
+    "Subflow Fwd Packets",
+    "Subflow Bwd Packets",
+    "Fwd Act Data Pkts",
+    "Fwd Seg Size Min",
+    "FWD Init Win Bytes",
+    "Bwd Init Win Bytes",
+    "ICMP Code",
+    "ICMP Type",
+    "Label"
+    ]
+    cfg.NUM_FEATURE = 82
+    cfg.STANDARDIZE =  True                                                                      
+    cfg.NUM_CLASS = 9
 
+  if dataset_name in ["cic-ids-17-18-80"]: #e.g adult
+    cfg.LABEL_NAME = "Label"
+    cfg.ROOT_DIR = "cic_results_80"
     df= pd.read_csv("raw_data/CIC_2017_day_aligned.csv")
     feature_names = (
        df

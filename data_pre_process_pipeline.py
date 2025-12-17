@@ -125,7 +125,7 @@ def main():
         df_unlabeled = pd.read_csv("raw_data/" + str(args.unlabeled_csv))
         df_train, df_remain = train_test_split(
             df,
-            test_size=0.5,
+            test_size=0.3,
             random_state=args.random_state,
             shuffle=True
         )
