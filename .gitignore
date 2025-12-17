@@ -1,3 +1,21 @@
 __pycache__/
 logs/
 git/
+# Exclude large data files
+results/**/*.npz
+results/**/*.pkl
+results/**/*.pt
+results/**/*.pth
+data/*/train.npz
+data/*/val.npz
+data/*/test.npz
+data/**/*.npz
+
+# Exclude large model checkpoints
+**/*.h5
+**/*.ckpt
+
+# But track important summaries
+!results/**/metrics_summary.csv
+!results/**/config.json
+!results/**/experiment_log.txt

@@ -59,8 +59,8 @@ def ensure_results_dir(args):
     alpha = args.alpha if args.alpha else ''
     clf = args.classifier if args.classifier else ''
     pool = args.pooling_method if args.pooling_method else ''
-    minority = "minority" if args.minority else ''
-    path = os.path.join('results', args.dataset, pool, args.al_method,clf, gen, minority, str(args.random_state), f"{args.al_function}_{alpha}")
+    seed = args.random_state  # Add this
+    path = os.path.join('results', args.dataset, pool, args.al_method, clf, gen, f"{args.al_function}_{alpha}_seed{seed}")  # Add _seed{seed}
     os.makedirs(path, exist_ok=True)
     return path
 
