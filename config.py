@@ -15,7 +15,7 @@ def get_dataset_config(dataset_name):
   cfg.IS_PYTORCH = False  # whether it will be used to train a PyTorch model or not (i.e., skelarn/XGBoost)
   cfg.VAL_BATCH_SIZE = 64  # for neural nets
 
-  if dataset_name in ["cic-ids-17-18-70"]: #e.g adult
+  if dataset_name in ["cic-ids-17-18-70", "cic-ids-17-18-70-S2", "cic-ids-17-18-70-S3"]: #e.g adult
     cfg.LABEL_NAME = "Label"
     cfg.ROOT_DIR = "cic_results_70"
     df= pd.read_csv("raw_data/CIC_2017_day_aligned.csv")
@@ -59,7 +59,7 @@ def get_dataset_config(dataset_name):
     cfg.STANDARDIZE =  True                                                                      
     cfg.NUM_CLASS = 9
 
-  if dataset_name in ["cic-ids-17-18"]: #e.g adult
+  elif dataset_name in ["cic-ids-17-18-80"]: #e.g adult
     cfg.LABEL_NAME = "Label"
     cfg.ROOT_DIR = "cic_results_80"
     df= pd.read_csv("raw_data/CIC_2017_day_aligned.csv")
