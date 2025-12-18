@@ -289,7 +289,7 @@ def run_alfa(args, results_dir):
 def main():
     args=parse_args()
     df_cfg = get_dataset_config(args.dataset)
-    res=ensure_results_dir(args, cfg)
+    res=ensure_results_dir(args, df_cfg)
     if args.al_method=='base' and not args.pooling_method:
         y_pred, y_true = run_base(args,res)
     elif args.al_method=='DA':

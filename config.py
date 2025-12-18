@@ -59,7 +59,7 @@ def get_dataset_config(dataset_name):
     cfg.STANDARDIZE =  True                                                                      
     cfg.NUM_CLASS = 9
 
-  if dataset_name in ["cic-ids-17-18-80"]: #e.g adult
+  if dataset_name in ["cic-ids-17-18"]: #e.g adult
     cfg.LABEL_NAME = "Label"
     cfg.ROOT_DIR = "cic_results_80"
     df= pd.read_csv("raw_data/CIC_2017_day_aligned.csv")
