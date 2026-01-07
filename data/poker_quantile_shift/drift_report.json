@@ -1,0 +1,38 @@
+{
+  "split_definition": "CIC-like: train from Domain A (labeled), val/test from Domain B (future)",
+  "settings": {
+    "shift_mode": "quantile",
+    "train_qmax": 0.6,
+    "test_qmin": 0.6,
+    "drift_features": ""
+  },
+  "drift_report_train_vs_test": {
+    "psi_mean": 0.0003389625971881841,
+    "psi_median": 7.707549265493127e-05,
+    "psi_max": 0.0011945367932835599,
+    "js_mean": 0.039549693571697,
+    "js_median": 3.77822523816569e-05,
+    "js_max": 0.39501381413571823,
+    "mmd_rbf": 0.3544388654807784
+  },
+  "sizes": {
+    "train": 256252,
+    "val": 128126,
+    "test": 128127
+  },
+  "classes": {
+    "n_classes": 10,
+    "class_names": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ]
+  }
+}

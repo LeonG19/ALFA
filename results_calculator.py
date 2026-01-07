@@ -122,7 +122,7 @@ def aggregate_f1_macro(
 
 
 df = aggregate_f1_macro(
-    root_dir="/home/lgarza3/projects/ctgan/28428_ALFA_Active_Learning_wit_Supplementary Material/supplementary_materials/source_code/results/cic_results",
+    root_dir="/home/lgarza3/projects/ctgan/28428_ALFA_Active_Learning_wit_Supplementary Material/supplementary_materials/source_code/results/cover_results",
     metric_key="f1_macro",
     dataset_mode = True,
     active_learning_method = "DA+ALFA",

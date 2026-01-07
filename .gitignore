@@ -7,7 +7,7 @@ logs/
 
 # --- DATA FOLDERS ---
 # Ignore all data folders entirely
-data/
+
 
 
 # 3. Explicitly allow only your important summary files

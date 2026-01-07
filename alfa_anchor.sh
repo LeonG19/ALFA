@@ -10,7 +10,7 @@ FILTER="synthetic"
 
 
 # AL methods
-AL_METHODS=("DA+ALFA")
+AL_METHODS=("base")
 
 # AL functions
 AL_FUNCTIONS=("random" "entropy" "margin" "powermargin" "coreset" "galaxy" "clue" "density")
