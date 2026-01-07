@@ -3,7 +3,7 @@
 # Base parameters
 CLASSIFIER="MLP"
 BUDGET=700
-DATASET="cic-ids-17-18-70"
+DATASETS=("cic-ids-17-18-70" ) #"cic-ids-17-18-70-S2" "cic-ids-17-18-70-S3"
 GENERATOR="CTGAN"
 FILTER="synthetic"
 
@@ -23,26 +23,28 @@ mkdir -p logs
 for method in "${AL_METHODS[@]}"; do
   for func in "${AL_FUNCTIONS[@]}"; do
     for rand in "${RS[@]}"; do
-      echo "Running experiment with al_method=$method and al_function=$func"
+      for data in "${DATASETS[@]}"; do
+        echo "Running experiment with al_method=$method and al_function=$func"
 
-      LOGFILE="logs/${method}_${func}.log"
+        LOGFILE="logs/${method}_${func}.log"
 
-      # Run experiment and capture success/failure
-      if python main.py \
-          --al_method "$method" \
-          --al_function "$func" \
-          --classifier "$CLASSIFIER" \
-          --budget "$BUDGET" \
-          --dataset "$DATASET" \
-          --generator "$GENERATOR" \
-          --random_state "$rand"
-      
-      then 
-        echo "✅ Success: al_method=$method, al_function=$func"
-      else
-        echo "❌ Failed: al_method=$method, al_function=$func (check $LOGFILE)"
-        continue
-      fi
+        # Run experiment and capture success/failure
+        if python main.py \
+            --al_method "$method" \
+            --al_function "$func" \
+            --classifier "$CLASSIFIER" \
+            --budget "$BUDGET" \
+            --dataset "$data" \
+            --generator "$GENERATOR" \
+            --random_state "$rand"
+        
+        then 
+          echo "✅ Success: al_method=$method, al_function=$func"
+        else
+          echo "❌ Failed: al_method=$method, al_function=$func (check $LOGFILE)"
+          continue
+        fi
+        done
       done
   done
 done

@@ -20,7 +20,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from yacs.config import CfgNode as CN
 from config import get_dataset_config
-
+from ucimlrepo import fetch_ucirepo
 
 def transform_discrete(df: pd.DataFrame, discrete_cols: list) -> pd.DataFrame:
     """
@@ -56,13 +56,20 @@ def preprocess_data(df: pd.DataFrame, label_col: str = 'Label') -> np.ndarray:
 
 
 def main():
+
     parser = argparse.ArgumentParser(
         description='Split CSV and save features/labels to NPZ with optional discrete transformation.'
     )
 
     parser.add_argument(
+        '--uci_num', default = None,
+        type = int
+    
+    )
+
+    parser.add_argument(
         '--input_csv',
-        required=True,
+        required=False,
         help='Path to the input CSV file (must contain a label column).'
     )
     parser.add_argument(
@@ -95,47 +102,72 @@ def main():
     )
     args = parser.parse_args()
 
-    # Load dataset config for discrete feature list
-    cfg = CN()
-    cfg.DATASET = get_dataset_config(args.output_dir)
-    discrete_cols = cfg.DATASET.DISCRETE_FEATURES
+    if args.uci_num is not None:
+        dataset = fetch_ucirepo(id=args.uci_num)
+        X = dataset.data.features
+        y = dataset.data.targets
+        df = pd.concat([X, y], axis=1)
+        df = df.sample(frac=0.5, random_state=args.random_state)
+        print(df.head(5))
+        print("number of classes in uci dataset", len(set(df["CLASS"].values)))
+        print("number of features in uci dataset", X.shape[1])
+        print("dataset proportion", np.unique(y, return_counts=True))
 
-    # Load full dataset
-    df = pd.read_csv("raw_data/" + str(args.input_csv))
-    print("number of classes in labeled dataset", len(set(df["Label"])))
-    # Optionally transform discrete features before splitting
-
-    if args.unlabeled_csv == False:
-        # First split: 50% train, 50% remainder
         df_train, df_remain = train_test_split(
             df,
             test_size=0.5,
             random_state=args.random_state,
             shuffle=True
         )
-
-        # Second split: 50% of remainder for val, 50% for test
         df_val, df_test = train_test_split(
             df_remain,
             test_size=0.5,
             random_state=args.random_state,
             shuffle=True
         )
-    else:
-        df_unlabeled = pd.read_csv("raw_data/" + str(args.unlabeled_csv))
-        df_train, df_remain = train_test_split(
-            df,
-            test_size=0.3,
-            random_state=args.random_state,
-            shuffle=True
-        )
 
-        df_val, df_test = train_test_split(
-            df_unlabeled,
-            test_size=0.3,
-            random_state=args.random_state,
-            shuffle=True
-        )
+    else:
+        # Load dataset config for discrete feature list
+        cfg = CN()
+        cfg.DATASET = get_dataset_config(args.output_dir)
+        discrete_cols = cfg.DATASET.DISCRETE_FEATURES
+
+        # Load full dataset
+        df = pd.read_csv("raw_data/" + str(args.input_csv))
+        print("number of classes in labeled dataset", len(set(df["Label"])))
+        # Optionally transform discrete features before splitting
+
+        if args.unlabeled_csv == False:
+            # First split: 50% train, 50% remainder
+            df_train, df_remain = train_test_split(
+                df,
+                test_size=0.5,
+                random_state=args.random_state,
+                shuffle=True
+            )
+
+            # Second split: 50% of remainder for val, 50% for test
+            df_val, df_test = train_test_split(
+                df_remain,
+                test_size=0.5,
+                random_state=args.random_state,
+                shuffle=True
+            )
+        else:
+            df_unlabeled = pd.read_csv("raw_data/" + str(args.unlabeled_csv))
+            df_train, df_remain = train_test_split(
+                df,
+                test_size=0.3,
+                random_state=args.random_state,
+                shuffle=True
+            )
+
+            df_val, df_test = train_test_split(
+                df_unlabeled,
+                test_size=0.3,
+                random_state=args.random_state,
+                shuffle=True
+            )
 
 
     # Prepare output directory

@@ -130,6 +130,226 @@ def get_dataset_config(dataset_name):
     cfg.STANDARDIZE = True
     cfg.NUM_CLASS = 2
 
+  elif dataset_name in ["cover_quantile_shift", "cover_cluster_shift", "cover"]:
+    cfg.LABEL_NAME = "Cover_Type"
+    cfg.NUM_FEATURE = 54
+    feature_names = [
+        # Continuous features (10)
+        "Elevation",
+        "Aspect",
+        "Slope",
+        "Horizontal_Distance_To_Hydrology",
+        "Vertical_Distance_To_Hydrology",
+        "Horizontal_Distance_To_Roadways",
+        "Hillshade_9am",
+        "Hillshade_Noon",
+        "Hillshade_3pm",
+        "Horizontal_Distance_To_Fire_Points",
+
+        # Wilderness Area (4 binary)
+        "Wilderness_Area1",
+        "Wilderness_Area2",
+        "Wilderness_Area3",
+        "Wilderness_Area4",
+
+        # Soil Type (40 binary)
+        "Soil_Type1",
+        "Soil_Type2",
+        "Soil_Type3",
+        "Soil_Type4",
+        "Soil_Type5",
+        "Soil_Type6",
+        "Soil_Type7",
+        "Soil_Type8",
+        "Soil_Type9",
+        "Soil_Type10",
+        "Soil_Type11",
+        "Soil_Type12",
+        "Soil_Type13",
+        "Soil_Type14",
+        "Soil_Type15",
+        "Soil_Type16",
+        "Soil_Type17",
+        "Soil_Type18",
+        "Soil_Type19",
+        "Soil_Type20",
+        "Soil_Type21",
+        "Soil_Type22",
+        "Soil_Type23",
+        "Soil_Type24",
+        "Soil_Type25",
+        "Soil_Type26",
+        "Soil_Type27",
+        "Soil_Type28",
+        "Soil_Type29",
+        "Soil_Type30",
+        "Soil_Type31",
+        "Soil_Type32",
+        "Soil_Type33",
+        "Soil_Type34",
+        "Soil_Type35",
+        "Soil_Type36",
+        "Soil_Type37",
+        "Soil_Type38",
+        "Soil_Type39",
+        "Soil_Type40",
+    ]
+
+
+    cfg.FEATURE_NAMES = feature_names
+    cfg.DISCRETE_FEATURES  =  [
+    # Wilderness Area (4)
+    "Wilderness_Area1",
+    "Wilderness_Area2",
+    "Wilderness_Area3",
+    "Wilderness_Area4",
+
+    # Soil Type (40)
+    "Soil_Type1",
+    "Soil_Type2",
+    "Soil_Type3",
+    "Soil_Type4",
+    "Soil_Type5",
+    "Soil_Type6",
+    "Soil_Type7",
+    "Soil_Type8",
+    "Soil_Type9",
+    "Soil_Type10",
+    "Soil_Type11",
+    "Soil_Type12",
+    "Soil_Type13",
+    "Soil_Type14",
+    "Soil_Type15",
+    "Soil_Type16",
+    "Soil_Type17",
+    "Soil_Type18",
+    "Soil_Type19",
+    "Soil_Type20",
+    "Soil_Type21",
+    "Soil_Type22",
+    "Soil_Type23",
+    "Soil_Type24",
+    "Soil_Type25",
+    "Soil_Type26",
+    "Soil_Type27",
+    "Soil_Type28",
+    "Soil_Type29",
+    "Soil_Type30",
+    "Soil_Type31",
+    "Soil_Type32",
+    "Soil_Type33",
+    "Soil_Type34",
+    "Soil_Type35",
+    "Soil_Type36",
+    "Soil_Type37",
+    "Soil_Type38",
+    "Soil_Type39",
+    "Soil_Type40",
+]
+
+    cfg.STANDARDIZE = True
+    cfg.NUM_CLASS = 7   
+
+
+
+
+  elif dataset_name in ["poker", "poker_quantile_shift", "poker_cluster_shift"]:
+    cfg.NUM_FEATURE = 10
+    cfg.LABEL_NAME = "CLASS"
+    feature_names = [
+    "S1",  # Suit of card #1 (1–4)
+    "C1",  # Rank of card #1 (1–13)
+    "S2",  # Suit of card #2 (1–4)
+    "C2",  # Rank of card #2 (1–13)
+    "S3",  # Suit of card #3 (1–4)
+    "C3",  # Rank of card #3 (1–13)
+    "S4",  # Suit of card #4 (1–4)
+    "C4",  # Rank of card #4 (1–13)
+    "S5",  # Suit of card #5 (1–4)
+    "C5",  # Rank of card #5 (1–13)
+    ]
+    cfg.FEATURE_NAMES = feature_names
+    cfg.DISCRETE_FEATURES = [
+    "S1",  # Suit of card #1 (1–4)
+    "C1",  # Rank of card #1 (1–13)
+    "S2",  # Suit of card #2 (1–4)
+    "C2",  # Rank of card #2 (1–13)
+    "S3",  # Suit of card #3 (1–4)
+    "C3",  # Rank of card #3 (1–13)
+    "S4",  # Suit of card #4 (1–4)
+    "C4",  # Rank of card #4 (1–13)
+    "S5",  # Suit of card #5 (1–4)
+    "C5",  # Rank of card #5 (1–13)
+    ]
+    cfg.STANDARDIZE = False
+    cfg.NUM_CLASS = 10
+
+  elif dataset_name in ["shuttle", "shuttle_quantile_shift", "shuttle_cluster_shift"]:
+    cfg.NUM_FEATURE = 7
+    cfg.LABEL_NAME = "class"
+    feature_names = [
+    "Rad_Flow",
+    "Fpv_Close",
+    "Fpv_Open",
+    "High",
+    "Bypass",
+    "Bpv_Close",
+    "Bpv_Open",
+    ]
+    cfg.FEATURE_NAMES = feature_names
+    cfg.DISCRETE_FEATURES = []
+    cfg.STANDARDIZE = True
+    cfg.NUM_CLASS = 7
+
+  elif dataset_name in ["diabetes", "diabetes_quantile_shift", "diabetes_cluster_shift"]:
+    cfg.NUM_FEATURE = 21
+    cfg.LABEL_NAME = "Diabetes_binary"
+    feature_names = [
+    "HighBP",             # Binary: high blood pressure (0=no, 1=yes)
+    "HighChol",           # Binary: high cholesterol (0=no, 1=yes)
+    "CholCheck",          # Binary: cholesterol check in last year (0=no, 1=yes)
+    "BMI",                # Integer: body mass index
+    "Smoker",             # Binary: ever smoked 100 cigarettes (0=no, 1=yes)
+    "Stroke",             # Binary: ever told you had a stroke (0=no, 1=yes)
+    "HeartDiseaseorAttack", # Binary: heart disease or attack (0=no, 1=yes)
+    "PhysActivity",       # Binary: physical activity in last 30 days (0=no, 1=yes)
+    "Fruits",             # Binary: ate fruit 1+ times per day (0=no, 1=yes)
+    "Veggies",            # Binary: ate vegetables 1+ times per day (0=no, 1=yes)
+    "HvyAlcoholConsump",  # Binary: heavy alcohol consumption (0=no, 1=yes)
+    "AnyHealthcare",      # Binary: has any health care coverage (0=no, 1=yes)
+    "NoDocbcCost",        # Binary: did not see doctor due to cost (0=no, 1=yes)
+    "GenHlth",            # Categorical: general health rating
+    "MentHlth",           # Integer: days of poor mental health last 30 days
+    "PhysHlth",           # Integer: days of poor physical health last 30 days
+    "DiffWalk",           # Binary: difficulty walking (0=no, 1=yes)
+    "Sex",                # Binary/Categorical: gender
+    "Age",                # Integer: age category / bucketed ages
+    "Education",          # Categorical: education level
+    "Income"              # Categorical: income bracket
+    ]
+    cfg.FEATURE_NAMES = feature_names
+    cfg.DISCRETE_FEATURES = [
+          "HighBP",
+          "HighChol",
+          "CholCheck",
+          "Smoker",
+          "Stroke",
+          "HeartDiseaseorAttack",
+          "PhysActivity",
+          "Fruits",
+          "Veggies",
+          "HvyAlcoholConsump",
+          "AnyHealthcare",
+          "NoDocbcCost",
+          "DiffWalk",
+          "Sex",
+          "GenHlth",
+          "Education",
+          "Income",
+          "Age"
+    ]
+    cfg.STANDARDIZE = True
+    cfg.NUM_CLASS = 2
 
   else:
     raise ValueError('unknown dataset {}'.format(dataset_name))

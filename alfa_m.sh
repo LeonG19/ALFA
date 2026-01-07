@@ -3,14 +3,14 @@
 # Base parameters
 CLASSIFIER="MLP"
 BUDGET=700
-DATASET="cic-ids-17-18-70"
+DATASETS=("cover", "shuttle", "poker", "diabetes" ) #"cic-ids-17-18-70-S2" "cic-ids-17-18-70-S3"
 GENERATOR="CTGAN"
 FILTER="synthetic"
 
 # AL methods
-AL_METHODS=("DA+ALFA")
+AL_METHODS=("DA+ALFA", "base")
 
-RS=("123" "456")
+RS=("42")
 
 # AL functions
 AL_FUNCTIONS=("random" "entropy"  "powermargin")
@@ -22,6 +22,7 @@ mkdir -p logs
 for method in "${AL_METHODS[@]}"; do
   for func in "${AL_FUNCTIONS[@]}"; do
     for rand in "${RS[@]}"; do
+      for data in "${DATASETS[@]}"; do 
         echo "Running experiment with al_method=$method and al_function=$func"
 
         LOGFILE="logs/${method}_${func}.log"
@@ -32,7 +33,7 @@ for method in "${AL_METHODS[@]}"; do
             --al_function "$func" \
             --classifier "$CLASSIFIER" \
             --budget "$BUDGET" \
-            --dataset "$DATASET" \
+            --dataset "$data" \
             --generator "$GENERATOR" \
             --random_state "$rand" \
             --minority 
@@ -42,6 +43,7 @@ for method in "${AL_METHODS[@]}"; do
           echo "❌ Failed: al_method=$method, al_function=$func (check $LOGFILE)"
           continue
         fi
+        done
     done
   done
 done
