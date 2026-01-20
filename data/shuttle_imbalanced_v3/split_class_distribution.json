@@ -1,0 +1,143 @@
+{
+  "train": {
+    "total": 14500,
+    "by_class": [
+      {
+        "class_id": 0,
+        "class_label": "1",
+        "count": 13775,
+        "fraction": 0.95
+      },
+      {
+        "class_id": 1,
+        "class_label": "2",
+        "count": 4,
+        "fraction": 0.00027586206896551725
+      },
+      {
+        "class_id": 2,
+        "class_label": "3",
+        "count": 14,
+        "fraction": 0.0009655172413793104
+      },
+      {
+        "class_id": 3,
+        "class_label": "4",
+        "count": 507,
+        "fraction": 0.03496551724137931
+      },
+      {
+        "class_id": 4,
+        "class_label": "5",
+        "count": 197,
+        "fraction": 0.013586206896551723
+      },
+      {
+        "class_id": 5,
+        "class_label": "6",
+        "count": 1,
+        "fraction": 6.896551724137931e-05
+      },
+      {
+        "class_id": 6,
+        "class_label": "7",
+        "count": 2,
+        "fraction": 0.00013793103448275863
+      }
+    ]
+  },
+  "val": {
+    "total": 28275,
+    "by_class": [
+      {
+        "class_id": 0,
+        "class_label": "1",
+        "count": 20663,
+        "fraction": 0.73078691423519
+      },
+      {
+        "class_id": 1,
+        "class_label": "2",
+        "count": 34,
+        "fraction": 0.0012024756852343059
+      },
+      {
+        "class_id": 2,
+        "class_label": "3",
+        "count": 100,
+        "fraction": 0.0035366931918656055
+      },
+      {
+        "class_id": 3,
+        "class_label": "4",
+        "count": 5442,
+        "fraction": 0.19246684350132626
+      },
+      {
+        "class_id": 4,
+        "class_label": "5",
+        "count": 2026,
+        "fraction": 0.07165340406719717
+      },
+      {
+        "class_id": 5,
+        "class_label": "6",
+        "count": 5,
+        "fraction": 0.00017683465959328028
+      },
+      {
+        "class_id": 6,
+        "class_label": "7",
+        "count": 5,
+        "fraction": 0.00017683465959328028
+      }
+    ]
+  },
+  "test": {
+    "total": 15225,
+    "by_class": [
+      {
+        "class_id": 0,
+        "class_label": "1",
+        "count": 11148,
+        "fraction": 0.7322167487684729
+      },
+      {
+        "class_id": 1,
+        "class_label": "2",
+        "count": 12,
+        "fraction": 0.0007881773399014779
+      },
+      {
+        "class_id": 2,
+        "class_label": "3",
+        "count": 57,
+        "fraction": 0.00374384236453202
+      },
+      {
+        "class_id": 3,
+        "class_label": "4",
+        "count": 2954,
+        "fraction": 0.19402298850574712
+      },
+      {
+        "class_id": 4,
+        "class_label": "5",
+        "count": 1044,
+        "fraction": 0.06857142857142857
+      },
+      {
+        "class_id": 5,
+        "class_label": "6",
+        "count": 4,
+        "fraction": 0.0002627257799671593
+      },
+      {
+        "class_id": 6,
+        "class_label": "7",
+        "count": 6,
+        "fraction": 0.00039408866995073894
+      }
+    ]
+  }
+}

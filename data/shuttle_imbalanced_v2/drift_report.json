@@ -1,0 +1,65 @@
+{
+  "split_definition": "CIC-like: train from Domain A (labeled), val/test from Domain B (future)",
+  "settings": {
+    "shift_mode": "class_imbalance",
+    "minority_def": "pct_total",
+    "minority_percentile": 0.25,
+    "minority_threshold": 200,
+    "topk_majority": 2,
+    "minority_pct_threshold": 0.2,
+    "labeled_minority_frac": 0.05,
+    "domainb_minority_frac": 0.8,
+    "class_shift_policy": "soft",
+    "allow_replacement": false,
+    "enforce_min_1_per_class_per_split": true,
+    "majority_classes": [
+      "1"
+    ],
+    "minority_classes": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "class_counts_full": {
+      "1": 45586,
+      "4": 8903,
+      "5": 3267,
+      "3": 171,
+      "2": 50
+    },
+    "sizes": {
+      "train": 14494,
+      "val": 28264,
+      "test": 15219
+    },
+    "drop_classes": [
+      "6",
+      "7"
+    ]
+  },
+  "drift_report_train_vs_test": {
+    "psi_mean": 0.06552843630355709,
+    "psi_median": 0.06885585306157892,
+    "psi_max": 0.1426580234399852,
+    "js_mean": 0.011031446014261719,
+    "js_median": 0.01090169896174894,
+    "js_max": 0.02435584941084577,
+    "mmd_rbf": 0.12965957916700044
+  },
+  "sizes": {
+    "train": 14494,
+    "val": 28264,
+    "test": 15219
+  },
+  "classes": {
+    "n_classes": 5,
+    "class_names": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  }
+}
