@@ -14,7 +14,7 @@ logs/
 !results/**/metrics_summary.csv
 !results/**/config.json
 !results/**/experiment_log.txt
-
+!data
 # --- GLOBAL EXCLUSIONS ---
 # Catch-all for large binaries just in case
 *.npz
