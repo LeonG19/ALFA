@@ -1,4 +1,4 @@
-[ALFA_README.md](https://github.com/user-attachments/files/24201213/ALFA_README.md)
+
 # DenseGAAL: Density-Aware Generative Augmentation for Active Learning
 
 A research framework that improves active learning under low-label regimes by adaptively augmenting rare classes via generative modeling.
