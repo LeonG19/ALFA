@@ -1,5 +1,5 @@
 [ALFA_README.md](https://github.com/user-attachments/files/24201213/ALFA_README.md)
-# ALFA: Active Learning with Frequency‑Adaptive Anchors & Generative Augmentation
+# DenseGAAL: Density-Aware Generative Augmentation for Active Learning
 
 A research framework that improves active learning under low-label regimes by adaptively augmenting rare classes via generative modeling.
 
